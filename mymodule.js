@@ -1,13 +1,12 @@
-const fs = require('fs');
+  module.exports = (directory, file_ext, callback) => 
+  require('fs').readdir(directory, (err, files) => 
+        err 
+        ? callback(err)
+        :callback(
+            null,
+            files.filter(
+           (file) => file.toString().split('.')[1] == file_ext.toString(),
+        ),
+    ),
+    );
 
-function FileReader(directory, file_ext, callback) {
-    fs.readdir(directory, function (err, files) {
-        if (err) {
-            return callback(err);
-        }
-        return callback(null, files.filter(
-file => file.toString().split('.')[1] == file_ext.toString()));
-    });
-}
-
-module.exports = FileReader;
